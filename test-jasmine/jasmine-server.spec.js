@@ -1,34 +1,33 @@
 const api = require("../modules/api").api;
 
-let todo = {
-	"created": new Date(),
-	"id": 0,
-	"title": "Mocked title"
+let behaviour = {
+	"date": new Date(),
+	"mood": "happy",
+	"reason": "loveLife",
+	"note": "amour"
 }
 
-let docToTest = null;
+let behaviourToTest = null;
 
-describe("Add", () => {
-	/*
-	addItem : (req,res) =>{
-		const todo = { id : ++lastId, title : req.body.title.trim()};
-		todos.push(todo);
-		res.send(todo);
-	}*/
+describe("Behaviour", () => {
 
 	beforeEach( done => {
-		let req = { body: { title: todo.title } };
+		let req = {
+			body : behaviour
+		}
 
 		let res = {
-			send : (docReturned) => {
-				docToTest = docReturned;
+			send : (behaviourReturned) => {
+				behaviourToTest = behaviourReturned;
 				done();
 			}
 		}
 		api.addItem(req, res);
 	});
 
-	it('should save a new todo', () => {
-		expect(docToTest.title).toEqual(todo.title);
+	it('should save a new behaviour', () => {
+		expect(behaviourToTest.mood).to.equal("happy");
+		expect(behaviourToTest.reason).to.equal("lovelife");
+		expect(behaviourToTest.note).to.equal("amour");
 	});
 })

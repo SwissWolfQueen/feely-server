@@ -1,34 +1,27 @@
 const expect = require("chai").expect;
 const api = require("../modules/api").api;
 
-describe("TODO list", () => {
+describe("Behaviour", () => {
 
-	const todo = {
-		"created": new Date(),
-		"id": 0,
-		"title": "Some title"
+	const behaviour = {
+		"date": new Date(),
+		"mood": "happy",
+		"reason": "loveLife",
+		"note": "amour"
 	}
-	/*
-	addItem : (req,res) =>{
-		const todo = { id : ++lastId, title : req.body.title.trim()};
-		todos.push(todo);
-		res.send(todo);
-	}
-	*/
 
-	it('should save a new todo', () => {
+
+	it('should save a new behaviour', () => {
 
 		const req = {
-			body : {
-				title : "Some title"
-			}
+			body : behaviour
 		}
 
 		const res = {
-			send : (docReturned) => {
-				expect(docReturned.title).to.equal(req.body.title);
-				expect(docReturned.id).to.equal(4);
-				expect(docReturned.title).to.not.equal("iujhorzeih zre");
+			send : (behaviourReturned) => {
+				expect(behaviourReturned.mood).to.equal("happy");
+				expect(behaviourReturned.reason).to.equal("lovelife");
+				expect(behaviourReturned.note).to.equal("amour");
 			}
 		}
 
